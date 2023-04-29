@@ -13,7 +13,8 @@ def convert_binary_to_decimal(binary):
                     temp = temp + 2**j
                 j -= 1
             dec_octet.append(temp)
-        converted = "".join(str(dec_octet[0]) + "." + str(dec_octet[1]) + "." + str(dec_octet[2]) + "." + str(dec_octet[3]))
+        converted = ("".join(str(dec_octet[0]) + "." + str(dec_octet[1]) +
+                             "." + str(dec_octet[2]) + "." + str(dec_octet[3])))
         return converted
     else:
         bin_octet.append(binary[0:8])
@@ -29,7 +30,8 @@ def convert_binary_to_decimal(binary):
                     temp = temp + 2**j
                 j -= 1
             dec_octet.append(temp)
-        converted = "".join(str(dec_octet[0]) + "." + str(dec_octet[1]) + "." + str(dec_octet[2]) + "." + str(dec_octet[3]))
+        converted = ("".join(str(dec_octet[0]) + "." + str(dec_octet[1]) +
+                             "." + str(dec_octet[2]) + "." + str(dec_octet[3])))
         return converted
 
 def convert_decimal_to_binary(decimal):
@@ -79,7 +81,8 @@ def convert_decimal_to_binary(decimal):
         else:
             bin_octet = bin_octet + '0'
         bin_complete.append(bin_octet)
-    converted = "".join(bin_complete[0] + "." + bin_complete[1] + "." + bin_complete[2] + "." + bin_complete[3])
+    converted = ("".join(bin_complete[0] + "." + bin_complete[1] +
+                        "." + bin_complete[2] + "." + bin_complete[3]))
     return converted
 
 def identify_IP_address_class(address):
@@ -108,7 +111,8 @@ def convert_subnet_mask_short_to_binary(short):
     mask_no_dot = ""
     mask_no_dot = "1" * short
     mask_no_dot = mask_no_dot + ("0" * (32-short))
-    mask_dot = mask_no_dot[0:8] + "." + mask_no_dot[8:16] + "." + mask_no_dot[16:24] + "." + mask_no_dot[24:32]
+    mask_dot = (mask_no_dot[0:8] + "." + mask_no_dot[8:16] +
+                "." + mask_no_dot[16:24] + "." + mask_no_dot[24:32])
     return mask_dot
 
 def calculate_network_address(binary_address, subnet_mask):
@@ -122,9 +126,12 @@ def calculate_network_address(binary_address, subnet_mask):
 
 def calculate_host_min_address(network_address):
     octets = network_address.split(".")
-    last_octet = octets[3]
-    last_octet = int(last_octet)+1
-    host_min_address = octets[0] + "." + octets[1] + "." + octets[2] + "." + str(last_octet)
+    host_min_address = octets[0] + "." + octets[1] + "." + octets[2] + "." + str(int(octets[3])+1)
+    return host_min_address
+
+def calculate_host_max_address(network_address, num_hosts):
+    octets = network_address.split(".")
+    host_min_address = octets[0] + "." + octets[1] + "." + octets[2] + "." + str(int(octets[3])+ num_hosts)
     return host_min_address
 
 def solve_simple_subnet(address):
@@ -132,13 +139,12 @@ def solve_simple_subnet(address):
     #Step1 Convert to Binary
     bin_address = convert_decimal_to_binary(parts[0])
     subnet_mask = convert_subnet_mask_short_to_binary(parts[1])
-    #Step2 Calculate the Network (Subnet) Address 
-    network_address = calculate_network_address(bin_address, subnet_mask)
-    #print("subnet address:", subnet_address)
+    #Step2 Calculate the Network (Subnet) Address
+    network_address = convert_binary_to_decimal(calculate_network_address(bin_address, subnet_mask))
     num_hosts = determine_max_number_of_hosts(parts[1])
     broadcast_address = ""
     host_min_address = calculate_host_min_address(network_address)
-    host_max_address = ""
+    host_max_address = calculate_host_max_address(network_address, num_hosts)
     return num_hosts, network_address, broadcast_address, host_min_address, host_max_address
 
 print("Section 1: IPv4 Addresses")
@@ -199,17 +205,23 @@ print("Calculating Simple Subnets")
 directions = """You need to determine:
 • Number of hosts
 • The network address
-• The broadcast addres
+• The broadcast address
 • The host minimum address (AKA the first host address in the subnet)
 • The host maximum address (AKA the last host address in the subnet)"""
-print(directions)
+simple_subnet_parts = ["Number of hosts:", "Network address:", "Broadcast address:", "Host min address:", "Host max address:"]
+print(directions, "\n")
 simple_subnet_question1 = "192.168.10.44/29"
-test = "138.101.114.250/25"
-print(solve_simple_subnet(test))
+print("For", simple_subnet_question1)
+simple_subnet_answer1 = solve_simple_subnet(simple_subnet_question1)
+for i in range(0, len(simple_subnet_parts)):
+    print(simple_subnet_parts[i], simple_subnet_answer1[i])
 simple_subnet_question2 = "10.10.5.20/18"
 simple_subnet_question3 = "146.187.130.81/23"
 simple_subnet_question4 = "145.16.25.18/21"
 
-
-print("calculate host min address")
-calculate_host_min_address("10001010.01100101.01110010.10000000")
+test = "138.101.114.250/25"
+print("For", test)
+test_answer = solve_simple_subnet(test)
+for i in range(0, len(simple_subnet_parts)):
+    print(simple_subnet_parts[i], test_answer[i])
+#print(solve_simple_subnet(test))
