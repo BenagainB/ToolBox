@@ -126,13 +126,21 @@ def calculate_network_address(binary_address, subnet_mask):
 
 def calculate_host_min_address(network_address):
     octets = network_address.split(".")
-    host_min_address = octets[0] + "." + octets[1] + "." + octets[2] + "." + str(int(octets[3])+1)
+    host_min_address = (octets[0] + "." + octets[1] + "." +
+                        octets[2] + "." + str(int(octets[3])+1))
     return host_min_address
 
 def calculate_host_max_address(network_address, num_hosts):
     octets = network_address.split(".")
-    host_min_address = octets[0] + "." + octets[1] + "." + octets[2] + "." + str(int(octets[3])+ num_hosts)
-    return host_min_address
+    host_max_address = (octets[0] + "." + octets[1] + "." +
+                        octets[2] + "." + str(int(octets[3])+ num_hosts))
+    return host_max_address
+
+def calculate_broadcast_address(host_max_address):
+    octets = host_max_address.split(".")
+    broadcast_address = (octets[0] + "." + octets[1] + "." +
+                        octets[2] + "." + str(int(octets[3])+ 1))
+    return broadcast_address
 
 def solve_simple_subnet(address):
     parts = address.split("/")
@@ -142,9 +150,9 @@ def solve_simple_subnet(address):
     #Step2 Calculate the Network (Subnet) Address
     network_address = convert_binary_to_decimal(calculate_network_address(bin_address, subnet_mask))
     num_hosts = determine_max_number_of_hosts(parts[1])
-    broadcast_address = ""
     host_min_address = calculate_host_min_address(network_address)
     host_max_address = calculate_host_max_address(network_address, num_hosts)
+    broadcast_address = calculate_broadcast_address(host_max_address)
     return num_hosts, network_address, broadcast_address, host_min_address, host_max_address
 
 print("Section 1: IPv4 Addresses")
@@ -215,9 +223,28 @@ print("For", simple_subnet_question1)
 simple_subnet_answer1 = solve_simple_subnet(simple_subnet_question1)
 for i in range(0, len(simple_subnet_parts)):
     print(simple_subnet_parts[i], simple_subnet_answer1[i])
+print()
+
 simple_subnet_question2 = "10.10.5.20/18"
+print("For", simple_subnet_question2)
+simple_subnet_answer2 = solve_simple_subnet(simple_subnet_question2)
+for i in range(0, len(simple_subnet_parts)):
+    print(simple_subnet_parts[i], simple_subnet_answer2[i])
+print()
+
 simple_subnet_question3 = "146.187.130.81/23"
+print("For", simple_subnet_question3)
+simple_subnet_answer3 = solve_simple_subnet(simple_subnet_question3)
+for i in range(0, len(simple_subnet_parts)):
+    print(simple_subnet_parts[i], simple_subnet_answer3[i])
+print()
+
 simple_subnet_question4 = "145.16.25.18/21"
+print("For", simple_subnet_question4)
+simple_subnet_answer4 = solve_simple_subnet(simple_subnet_question4)
+for i in range(0, len(simple_subnet_parts)):
+    print(simple_subnet_parts[i], simple_subnet_answer4[i])
+print()
 
 test = "138.101.114.250/25"
 print("For", test)
