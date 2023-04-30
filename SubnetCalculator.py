@@ -132,8 +132,17 @@ def calculate_host_min_address(network_address):
 
 def calculate_host_max_address(network_address, num_hosts):
     octets = network_address.split(".")
+    temp_octet2 = int(octets[2])
+    temp_octet3 = int(octets[3])
+    #print(int(num_hosts / 256))
+    higher_octet = int(num_hosts / 256)
+    if temp_octet2 + higher_octet < 256:
+        temp_octet2 = temp_octet2 + higher_octet
+    temp_octet3 = temp_octet3 + (num_hosts - higher_octet * 256)
+    """host_max_address = (octets[0] + "." + octets[1] + "." +
+                        octets[2] + "." + str(int(octets[3])+ num_hosts))"""
     host_max_address = (octets[0] + "." + octets[1] + "." +
-                        octets[2] + "." + str(int(octets[3])+ num_hosts))
+                        str(temp_octet2) + "." + str(temp_octet3))
     return host_max_address
 
 def calculate_broadcast_address(host_max_address):
