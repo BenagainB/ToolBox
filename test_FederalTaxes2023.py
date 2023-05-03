@@ -6,13 +6,12 @@
 # Taxes for the 2023 calendar year are due in April 2024.
 
 import unittest
-from FederalTaxes2023 import SingleFiler
-#, MarriedFilingJointly
+from FederalTaxes2023 import SingleFiler, MarriedFilingJointly
 #, MarriedFilingSeparately
 #, HeadOfHousehold
 
-class TestSinglyLinkedList(unittest.TestCase):
-    """ test class for SinglyLinkedList """
+class TestSingleFiler(unittest.TestCase):
+    """ test class for SingleFiler """
     def setUp(self):
         self.single_guy = SingleFiler()
         #self.node1 = Node(1, None, None)
@@ -32,8 +31,14 @@ class TestSinglyLinkedList(unittest.TestCase):
         #self.assertEqual(2, self.node1.get_value())
         #self.assertIsNone(self.node1.get_next())
 
+class TestMarriedFilingJointly(unittest.TestCase):
+    """ test class for MarriedFilingJointly """
+    def setUp(self):
+        self.happy_couple = MarriedFilingJointly()
 
-
+    def test_creation_of_married_joint_filer(self):
+        """ ensure married joint filer class is instanced """
+        self.assertIsInstance(self.happy_couple, MarriedFilingJointly)
 
 
 # python test_SinglyLinkedList.py

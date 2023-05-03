@@ -1,75 +1,69 @@
 # 2023FederalTaxes.py
-""" contains Node class and SinglyLinkedList class """
-
-class Node:
-    """ simple Node class for Linked List Class """
-    def __init__(self, value, prev_node, next_node):
-        self.value = value
-        self.prev = prev_node  # not used for singly linked list
-        self.next = next_node
-
-    def get_next(self):
-        """ return the node after current node """
-        return self.next
-
-    def set_next(self, node):
-        """ set the node to follow current node """
-        self.next = node
-
-    def get_value(self):
-        """ return the value assigned to the current node """
-        return self.value
-
-    def set_value(self, value):
-        """ set the value of the current node """
-        if value is None:
-            return
-        self.value = value
-
-class SinglyLinkedList:
-    """ LinkedList class with only knowledge of head node """
-    def __init__(self):
-        self.head = None
-        self.size = 0
-
-    def get_size(self):
-        """ return the number of nodes in the LinkedList """
-        return self.size
-
-    def add_first(self, node):
-        """ add node at the beginning of the list """
-        if node is None:
-            return
-        node.set_next(self.head)
-        self.head = node
-        self.size += 1
-
-    def add_last(self, node):
-        """ add node at the end of the list """
-        if self.size == 0:
-            self.add_first(node)
-        else:
-            cur = self.head
-            while cur.get_next() is not None:
-                cur = cur.get_next()
-            cur.set_next(node)
-            self.size += 1
+""" contains SingleFiler class and MarriedFilingJointly class """
 
 class SingleFiler():
     """ docstring """
     def __init__(self):
+        self.income = 0.0
         self.tax_rate = 0
         self.tax_bracket = []
         self.tax_owed = 0
+
+    def set_income(self, income):
+        """ docstring """
+        self.income = income
+
+    def get_income(self):
+        """ docstring """
+        return self.income
+
+class MarriedFilingJointly():
+    """ docstring """
+    def __init__(self):
+        self.income = 0.0
+        self.tax_rate = 0
+        self.tax_bracket = []
+        self.tax_owed = 0
+
+    def set_income(self, income):
+        """ docstring """
+        self.income = income
+
+    def get_income(self):
+        """ docstring """
+        return self.income
+
+def switch(filing_status, income):
+    if filing_status == "1":
+        status = SingleFiler()
+        status.set_income(income)
+        return status
+    elif filing_status == "2":
+        status = MarriedFilingJointly()
+        status.set_income(income)
+        return status
+    elif filing_status == "3":
+        status = MarriedFilingJointly()
+        status.set_income(income)
+        return status
+    elif filing_status == "4":
+        status = MarriedFilingJointly()
+        status.set_income(income)
+        return status
+    else:
+        return "You can become a mobile app developer"
 
 def main():
     """ main function """
     income = input("How much gross income did you make in the 2023 tax year? ")
     income = income.strip("$").strip(" ").strip(",").strip(".")
     income = float(income.replace(",",""))
-    
-    print(income)
-    print(type(income))
+    print("How are you filing this year?")
+    statuses = ["Single Filer", "Married Filing Jointly", "Married Filing Separately", "Head of Household"]
+    filing_status = input(f'Enter 1 for {statuses[0]}, 2 for {statuses[1]}, 3 for {statuses[2]}, or 4 for {statuses[3]}: ')
+
+    my_taxes = switch(filing_status, income)
+    print(type(my_taxes))
 
 if __name__ == "__main__":
     main()
