@@ -33,25 +33,58 @@ class MarriedFilingJointly():
         """ docstring """
         return self.income
 
+class MarriedFilingSeparately():
+    """ docstring """
+    def __init__(self):
+        self.income = 0.0
+        self.tax_rate = 0
+        self.tax_bracket = []
+        self.tax_owed = 0
+
+    def set_income(self, income):
+        """ docstring """
+        self.income = income
+
+    def get_income(self):
+        """ docstring """
+        return self.income
+
+class HeadOfHousehold():
+    """ docstring """
+    def __init__(self):
+        self.income = 0.0
+        self.tax_rate = 0
+        self.tax_bracket = []
+        self.tax_owed = 0
+
+    def set_income(self, income):
+        """ docstring """
+        self.income = income
+
+    def get_income(self):
+        """ docstring """
+        return self.income
+
 def switch(filing_status, income):
+    """ docstring """
     if filing_status == "1":
         status = SingleFiler()
         status.set_income(income)
         return status
-    elif filing_status == "2":
+    if filing_status == "2":
         status = MarriedFilingJointly()
         status.set_income(income)
         return status
-    elif filing_status == "3":
-        status = MarriedFilingJointly()
+    if filing_status == "3":
+        status = MarriedFilingSeparately()
         status.set_income(income)
         return status
-    elif filing_status == "4":
-        status = MarriedFilingJointly()
+    if filing_status == "4":
+        status = HeadOfHousehold()
         status.set_income(income)
         return status
-    else:
-        return "You can become a mobile app developer"
+    #else:
+    return "Invalid Entry"
 
 def main():
     """ main function """
@@ -60,7 +93,7 @@ def main():
     income = float(income.replace(",",""))
     print("How are you filing this year?")
     statuses = ["Single Filer", "Married Filing Jointly", "Married Filing Separately", "Head of Household"]
-    filing_status = input(f'Enter 1 for {statuses[0]}, 2 for {statuses[1]}, 3 for {statuses[2]}, or 4 for {statuses[3]}: ')
+    filing_status = input(f"Enter 1 for {statuses[0]}, 2 for {statuses[1]}, 3 for {statuses[2]}, or 4 for {statuses[3]}: ")
 
     my_taxes = switch(filing_status, income)
     print(type(my_taxes))
