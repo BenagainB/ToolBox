@@ -24,6 +24,25 @@ class TestSingleFiler(unittest.TestCase):
         """ ensure single filer class is instanced """
         self.assertIsInstance(self.single_guy, SingleFiler)
 
+    def test_income_value_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(100000,self.single_guy.income)
+        self.assertEqual(0, self.single_guy.income)
+
+    def test_tax_rate_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(10, self.single_guy.tax_rate)
+        self.assertEqual(0.0, self.single_guy.tax_rate)
+
+    def test_tax_bracket_initial_success(self):
+        """ docstring """
+        self.assertNotEqual([10000,25000], self.single_guy.tax_bracket)
+        self.assertEqual([], self.single_guy.tax_bracket)
+
+    def test_tax_owed_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(1000, self.single_guy.tax_owed)
+        self.assertEqual(0.0, self.single_guy.tax_owed)
         # self.assertIsNotNone(self.my_linked_list)
         # self.assertIsNotNone(self.node1)
         # self.assertEqual(1, self.node1.get_value())

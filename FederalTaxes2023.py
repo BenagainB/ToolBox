@@ -5,9 +5,9 @@ class SingleFiler():
     """ docstring """
     def __init__(self):
         self.income = 0.0
-        self.tax_rate = 0
+        self.tax_rate = 0.0
         self.tax_bracket = []
-        self.tax_owed = 0
+        self.tax_owed = 0.0
 
     def set_income(self, income):
         """ docstring """
@@ -21,9 +21,9 @@ class MarriedFilingJointly():
     """ docstring """
     def __init__(self):
         self.income = 0.0
-        self.tax_rate = 0
+        self.tax_rate = 0.0
         self.tax_bracket = []
-        self.tax_owed = 0
+        self.tax_owed = 0.0
 
     def set_income(self, income):
         """ docstring """
@@ -37,9 +37,9 @@ class MarriedFilingSeparately():
     """ docstring """
     def __init__(self):
         self.income = 0.0
-        self.tax_rate = 0
+        self.tax_rate = 0.0
         self.tax_bracket = []
-        self.tax_owed = 0
+        self.tax_owed = 0.0
 
     def set_income(self, income):
         """ docstring """
@@ -53,9 +53,9 @@ class HeadOfHousehold():
     """ docstring """
     def __init__(self):
         self.income = 0.0
-        self.tax_rate = 0
+        self.tax_rate = 0.0
         self.tax_bracket = []
-        self.tax_owed = 0
+        self.tax_owed = 0.0
 
     def set_income(self, income):
         """ docstring """
