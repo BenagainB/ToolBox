@@ -122,6 +122,27 @@ class TestHeadOfHousehold(unittest.TestCase):
         """ ensure married joint filer class is instanced """
         self.assertIsInstance(self.head_of_house, HeadOfHousehold)
 
+    def test_income_value_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(100000,self.head_of_house.income)
+        self.assertEqual(0, self.head_of_house.income)
+
+    def test_tax_rate_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(10, self.head_of_house.tax_rate)
+        self.assertEqual(0.0, self.head_of_house.tax_rate)
+
+    def test_tax_bracket_initial_success(self):
+        """ docstring """
+        self.assertNotEqual([10000,25000], self.head_of_house.tax_bracket)
+        self.assertEqual([], self.head_of_house.tax_bracket)
+
+    def test_tax_owed_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(1000, self.head_of_house.tax_owed)
+        self.assertEqual(0.0, self.head_of_house.tax_owed)
+
+
 # python test_SinglyLinkedList.py
     # ...........
     # ----------------------------------------------------------------------
