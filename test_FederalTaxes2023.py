@@ -87,6 +87,12 @@ class TestMarriedFilingJointly(unittest.TestCase):
         self.assertNotEqual(1000, self.happy_couple.tax_owed)
         self.assertEqual(0.0, self.happy_couple.tax_owed)
 
+    def test_set_get_income_success(self):
+        """ docstring """
+        self.happy_couple.set_income(100000)
+        self.assertNotEqual(0, self.happy_couple.get_income())
+        self.assertEqual(100000, self.happy_couple.get_income())
+
 
 class TestMarriedFilingSeparately(unittest.TestCase):
     """ test class for MarriedFilingSeparately """
@@ -117,6 +123,13 @@ class TestMarriedFilingSeparately(unittest.TestCase):
         """ docstring """
         self.assertNotEqual(1000, self.unhappy_couple.tax_owed)
         self.assertEqual(0.0, self.unhappy_couple.tax_owed)
+
+    def test_set_get_income_success(self):
+        """ docstring """
+        self.unhappy_couple.set_income(100000)
+        self.assertNotEqual(0, self.unhappy_couple.get_income())
+        self.assertEqual(100000, self.unhappy_couple.get_income())
+
 
 class TestHeadOfHousehold(unittest.TestCase):
     """ test class for MarriedFilingSeparately """
