@@ -92,6 +92,25 @@ class TestMarriedFilingSeparately(unittest.TestCase):
         """ ensure married joint filer class is instanced """
         self.assertIsInstance(self.unhappy_couple, MarriedFilingSeparately)
 
+    def test_income_value_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(100000,self.unhappy_couple.income)
+        self.assertEqual(0, self.unhappy_couple.income)
+
+    def test_tax_rate_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(10, self.unhappy_couple.tax_rate)
+        self.assertEqual(0.0, self.unhappy_couple.tax_rate)
+
+    def test_tax_bracket_initial_success(self):
+        """ docstring """
+        self.assertNotEqual([10000,25000], self.unhappy_couple.tax_bracket)
+        self.assertEqual([], self.unhappy_couple.tax_bracket)
+
+    def test_tax_owed_initial_success(self):
+        """ docstring """
+        self.assertNotEqual(1000, self.unhappy_couple.tax_owed)
+        self.assertEqual(0.0, self.unhappy_couple.tax_owed)
 
 class TestHeadOfHousehold(unittest.TestCase):
     """ test class for MarriedFilingSeparately """
