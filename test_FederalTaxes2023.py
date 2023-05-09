@@ -43,6 +43,12 @@ class TestSingleFiler(unittest.TestCase):
         """ docstring """
         self.assertNotEqual(1000, self.single_guy.tax_owed)
         self.assertEqual(0.0, self.single_guy.tax_owed)
+
+    def test_set_get_income_success(self):
+        """ docstring """
+        self.single_guy.set_income(100000)
+        self.assertNotEqual(0, self.single_guy.get_income())
+        self.assertEqual(100000, self.single_guy.get_income())
         # self.assertIsNotNone(self.my_linked_list)
         # self.assertIsNotNone(self.node1)
         # self.assertEqual(1, self.node1.get_value())

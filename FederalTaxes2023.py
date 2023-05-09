@@ -16,6 +16,7 @@ class SingleFiler():
     def get_income(self):
         """ docstring """
         return self.income
+    
 
 class MarriedFilingJointly():
     """ docstring """
@@ -85,6 +86,7 @@ def switch(filing_status, income):
         return status
     #else:
     return "Invalid Entry"
+
 
 def main():
     """ main function """
