@@ -161,6 +161,11 @@ class TestHeadOfHousehold(unittest.TestCase):
         self.assertNotEqual(1000, self.head_of_house.tax_owed)
         self.assertEqual(0.0, self.head_of_house.tax_owed)
 
+    def test_set_get_income_success(self):
+        """ docstring """
+        self.head_of_house.set_income(100000)
+        self.assertNotEqual(0, self.head_of_house.get_income())
+        self.assertEqual(100000, self.head_of_house.get_income())
 
 # python test_SinglyLinkedList.py
     # ...........
