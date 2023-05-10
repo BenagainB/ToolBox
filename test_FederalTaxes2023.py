@@ -49,6 +49,19 @@ class TestSingleFiler(unittest.TestCase):
         self.single_guy.set_income(100000)
         self.assertNotEqual(0, self.single_guy.get_income())
         self.assertEqual(100000, self.single_guy.get_income())
+
+    def test_fields_lowest_tax_success(self):
+        """ docstring """
+        self.assertEqual(0.0, self.single_guy.get_income())
+        self.assertEqual(0.0, self.single_guy.tax_rate)
+        self.assertEqual([], self.single_guy.tax_bracket)
+        self.assertEqual(0.0, self.single_guy.tax_owed)
+        self.single_guy.set_income(10000)   #lowest tax bracket
+        self.assertEqual(10000.0, self.single_guy.get_income())
+        self.assertEqual(0.1, self.single_guy.tax_rate)
+        self.assertEqual([0,10275], self.single_guy.tax_bracket)
+        self.assertEqual(1000.0, self.single_guy.tax_owed)
+        #self.assertNotEqual(0, self.single_guy.get_income())
         # self.assertIsNotNone(self.my_linked_list)
         # self.assertIsNotNone(self.node1)
         # self.assertEqual(1, self.node1.get_value())

@@ -12,6 +12,11 @@ class SingleFiler():
     def set_income(self, income):
         """ docstring """
         self.income = income
+        if income < 10276:
+            self.tax_rate = 0.10
+            self.tax_bracket.append(0)
+            self.tax_bracket.append(10275)
+            self.tax_owed = self.income * self.tax_rate
 
     def get_income(self):
         """ docstring """
